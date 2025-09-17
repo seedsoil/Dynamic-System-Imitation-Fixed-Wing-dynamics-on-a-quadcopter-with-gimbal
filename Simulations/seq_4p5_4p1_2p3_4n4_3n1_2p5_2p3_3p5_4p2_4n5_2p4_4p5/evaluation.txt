@@ -1,0 +1,19 @@
+[Run] seq_4p5_4p1_2p3_4n4_3n1_2p5_2p3_3p5_4p2_4n5_2p4_4p5
+[Window] 0..60.0 s
+
+[QC OFF vs FW]
+  3D pos MAE: 906.951 m (x=410.569 y=728.662 z=19.825); MAX=3464.240 m
+  Att MAE [deg]: roll=30.34 (max=179.45) pitch=35.57 (max=90.12) yaw=66.44 (max=180.00)
+  POV MAE [deg]: 119.36 (max=179.99)
+
+[QC ON  vs FW]
+  3D pos MAE: 76.286 m (x=53.298 y=47.938 z=5.150); MAX=216.824 m
+  Att MAE [deg]: roll=4.21 (max=180.00) pitch=5.33 (max=92.23) yaw=3.96 (max=179.79)
+  POV MAE [deg]: 12.37 (max=153.37)
+
+[IMPROVEMENT ON vs OFF] (positive is better)
+  3D pos MAE:   +91.59 %
+  Alt MAE:      +74.02 %
+  Att MAE φ/θ/ψ:+86.12 / +85.00 / +94.04 %
+  POV MAE:      +89.64 %
+

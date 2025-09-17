@@ -1,0 +1,19 @@
+[Run] profile_turnClimb_fa0.07_ail6_climb4-14
+[Window] 0..20.0 s
+
+[QC OFF vs FW]
+  3D pos MAE: 2.344 m (x=0.409 y=0.788 z=1.995); MAX=8.630 m
+  Att MAE [deg]: roll=4.18 (max=18.71) pitch=3.35 (max=20.60) yaw=1.01 (max=7.42)
+  POV MAE [deg]: 11.45 (max=40.48)
+
+[QC ON  vs FW]
+  3D pos MAE: 1.054 m (x=0.173 y=0.597 z=0.727); MAX=3.362 m
+  Att MAE [deg]: roll=1.64 (max=4.37) pitch=2.05 (max=6.11) yaw=0.42 (max=1.04)
+  POV MAE [deg]: 5.51 (max=12.88)
+
+[IMPROVEMENT ON vs OFF] (positive is better)
+  3D pos MAE:   +55.03 %
+  Alt MAE:      +63.55 %
+  Att MAE φ/θ/ψ:+60.79 / +38.75 / +58.39 %
+  POV MAE:      +51.88 %
+

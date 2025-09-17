@@ -1,0 +1,19 @@
+[Run] seq_1p0_1p0_1p0_1p0_1p0_1p0_1p0_1p0
+[Window] 0..20.0 s
+
+[QC OFF vs FW]
+  3D pos MAE: 0.433 m (x=0.183 y=0.000 z=0.355); MAX=0.950 m
+  Att MAE [deg]: roll=0.00 (max=0.00) pitch=1.44 (max=3.27) yaw=0.00 (max=0.00)
+  POV MAE [deg]: 2.87 (max=6.50)
+
+[QC ON  vs FW]
+  3D pos MAE: 0.422 m (x=0.190 y=0.000 z=0.342); MAX=0.916 m
+  Att MAE [deg]: roll=0.00 (max=0.00) pitch=1.42 (max=2.72) yaw=0.00 (max=0.00)
+  POV MAE [deg]: 2.81 (max=5.43)
+
+[IMPROVEMENT ON vs OFF] (positive is better)
+  3D pos MAE:   +2.44 %
+  Alt MAE:      +3.46 %
+  Att MAE φ/θ/ψ: +0.00 /  +1.95 /  +0.00 %
+  POV MAE:      +2.10 %
+
