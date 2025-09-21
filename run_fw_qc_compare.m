@@ -545,10 +545,20 @@ saveplot(gcf, outDir, "u_QC_timeline__on", opts); close(f);
 
 % ---------- return ----------
 S = struct();
-S.outDir = outDir;  S.seqToken = seqToken;  S.evalText = evalText;
+S.outDir = outDir;  
+S.seqToken = seqToken;  
+S.evalText = evalText;
 S.metrics = struct('MAE3_off',MAE3_off,'MAE3_on',MAE3_on, ...
     'MAE_att_off',MAE_att_off,'MAE_att_on',MAE_att_on,'MAE_pov_off',MAE_pov_off,'MAE_pov_on',MAE_pov_on, ...
     'improvements',struct('pos',imp_pos,'alt',imp_alt,'attR',imp_attR,'attP',imp_attP,'attY',imp_attY,'pov',imp_pov));
+
+% ---------- also save state histories for animation ----------
+S.states = struct();
+S.states.t     = t;
+S.states.Xfw   = Xfw;
+S.states.XqcOn = qc_on.X;
+S.states.XqcOff= qc_off.X;
+
 end  % ======================= end main =======================
 
 % ======================= SUBFUNCTIONS (non-nested) =======================

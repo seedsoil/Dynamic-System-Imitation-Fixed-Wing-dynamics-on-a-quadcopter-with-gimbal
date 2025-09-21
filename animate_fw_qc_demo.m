@@ -1,0 +1,66 @@
+% animate_fw_qc_compare_refresh.m
+% Refresh ONLY the workspace inputs for an existing Simulink model.
+% No model creation/opening here. Just run this, then start your sim.
+
+%% 1) Run your compare function (channels 2–4 only in this example) ----------
+seq = [2   10.5;
+ 4    4.5;
+ 3   15.0;
+ 2   12.0;
+ 4   -1.5;
+ 2    9.0;
+ 3   -7.5;
+ 2  -15.0;
+ 4    4.5;
+ 2  -13.5;
+ 3   10.5;
+ 2   -3.0;
+ 4  -13.5;
+ 2    6.0;
+ 3    0.0;
+ 2   -9.0;
+ 4   12.0;
+ 3   -3.0;
+ 2    1.5;
+ 4  -15.0];
+S = run_fw_qc_compare(seq, TsimTotal=60, TAnalyzeTo=35);
+
+assert(isfield(S,"states"), "S.states absent. Patch run_fw_qc_compare to save states.");
+t     = S.states.t;        % Nx1 double, strictly increasing
+Xfw   = S.states.Xfw;      % N x 13 (pos 1:3, quat 7:10 [q0 q1 q2 q3])
+XqcOn = S.states.XqcOn;    % N x 19 (pos 1:3, quat 7:10)
+
+%% 2) Build From-Workspace inputs (Structure-with-time) ----------------------
+% Translation: values must be 2 x 3 x N  (UAVs x components x time)
+P_fw = Xfw(:,1:3);
+P_qc = XqcOn(:,1:3);
+Trans.time               = t;
+Trans.signals.values     = permute(cat(3, P_fw, P_qc), [3 2 1]);  % 2x3xN
+Trans.signals.dimensions = [2 3];
+
+% Rotation: QUATERNION (so set block Rotation format = "Quaternion")
+Q_fw = Xfw(:,7:10);
+Q_qc = XqcOn(:,7:10);
+Rot.time                 = t;
+Rot.signals.values       = permute(cat(3, Q_fw, Q_qc), [3 2 1]);  % 2x4xN
+Rot.signals.dimensions   = [2 4];
+
+% UAV Type (constant at t=0) — mapping: 1=quad, 2=fixed-wing (row order = [FW; QC])
+% UAVType.time                 = 0;
+% UAVType.signals.values       = int32([2; 1]);   % Row1 FW, Row2 QC
+% UAVType.signals.dimensions   = [2 1];
+
+% Mesh config (constant at t=0): [size  r  g  b  alpha]
+MeshCfg.time                 = 0;
+MeshCfg.signals.values       = [ ...
+    15  0.00 0.45 0.74  0.90 ;   % FW blue
+    15  0.85 0.33 0.10  0.90 ];  % QC orange
+MeshCfg.signals.dimensions   = [2 5];
+
+disp('Workspace signals updated: Trans, Rot (Quaternion), UAVType, MeshCfg.');
+disp('Tip: In your UAV Animation block, set: NumberOfUAVs=2, Rotation format=Quaternion,');
+disp('     Inertial Z=Down, Enable dynamic UAV mesh=on. Then run the simulation.');
+
+% (Optional) If you *do* want to refresh StopTime on a specific loaded model:
+% mdl = "fw_qc_anim";
+% if bdIsLoaded(mdl), set_param(mdl,"StopTime",num2str(t(end))); end
