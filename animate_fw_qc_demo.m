@@ -3,27 +3,9 @@
 % No model creation/opening here. Just run this, then start your sim.
 
 %% 1) Run your compare function (channels 2–4 only in this example) ----------
-seq = [2   10.5;
- 4    4.5;
- 3   15.0;
- 2   12.0;
- 4   -1.5;
- 2    9.0;
- 3   -7.5;
- 2  -15.0;
- 4    4.5;
- 2  -13.5;
- 3   10.5;
- 2   -3.0;
- 4  -13.5;
- 2    6.0;
- 3    0.0;
- 2   -9.0;
- 4   12.0;
- 3   -3.0;
- 2    1.5;
- 4  -15.0];
-S = run_fw_qc_compare(seq, TsimTotal=60, TAnalyzeTo=35);
+seq = [4 2;3 1;2 2;4 -2;3 1;2 2;4 1;2 1;3 2;4 -1;2 2;3 -1;4 2;2 2;3 1;4 1;3 -2;2 2;4 -1;2 1;3 2;4 1;2 2;3 1
+];
+S = run_fw_qc_compare(seq, TsimTotal=60, TAnalyzeTo=60);
 
 assert(isfield(S,"states"), "S.states absent. Patch run_fw_qc_compare to save states.");
 t     = S.states.t;        % Nx1 double, strictly increasing
